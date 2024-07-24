@@ -1,28 +1,48 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addTask } from '../redux/actions';
+import { addTask } from '../redux/taskSlice';
 
 const AddTask = () => {
-  const [taskText, setTaskText] = useState('');
+  const [text, setText] = useState('');
+  const [category, setCategory] = useState('');
+  const [dueDate, setDueDate] = useState('');
   const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (taskText.trim() !== '') {
-      dispatch(addTask({ text: taskText, completed: false }));
-      setTaskText('');
+    if (text && category && dueDate) {
+      dispatch(addTask({ text, category, dueDate }));
+      setText('');
+      setCategory('');
+      setDueDate('');
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="mb-4">
+    <form onSubmit={handleSubmit} className="p-4 bg-gray-100 rounded-lg">
       <input
         type="text"
-        value={taskText}
-        onChange={(e) => setTaskText(e.target.value)}
-        className="w-full p-2 border border-gray-300 rounded-md"
-        placeholder="Add a new task"
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+        placeholder="Task Description"
+        className="border p-2 m-2 w-full"
       />
+      <input
+        type="text"
+        value={category}
+        onChange={(e) => setCategory(e.target.value)}
+        placeholder="Category"
+        className="border p-2 m-2 w-full"
+      />
+      <input
+        type="date"
+        value={dueDate}
+        onChange={(e) => setDueDate(e.target.value)}
+        className="border p-2 m-2 w-full"
+      />
+      <button type="submit" className="bg-blue-500 text-white p-2 rounded">
+        Add Task
+      </button>
     </form>
   );
 };
