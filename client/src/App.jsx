@@ -1,14 +1,14 @@
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
-import TaskManager from './views/TaskManager';
 
-function App() {
-  return (
+import React from 'react';
+import { Route, Routes } from 'react-router-dom';
+import Home from './views/Home';
+
+const App = () => (
+  
     <Routes>
-    <Route path="/" element={<TaskManager />} />
+      <Route path="/" element={<Home />} />
     </Routes>
-  );
-}
+
+);
 
 export default App;
-
