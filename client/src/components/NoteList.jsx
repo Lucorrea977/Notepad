@@ -3,12 +3,13 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import NoteCard from './NoteCard';
 
-const NoteList = ({ searchTerm }) => {
+const NoteList = ({ searchTerm, category }) => {
   const notes = useSelector(state => state.notes.notes);
 
   const filteredNotes = notes.filter(note =>
-    note.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    note.content.toLowerCase().includes(searchTerm.toLowerCase())
+    note.category === category &&
+    (note.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      note.content.toLowerCase().includes(searchTerm.toLowerCase()))
   );
 
   return (
@@ -19,5 +20,4 @@ const NoteList = ({ searchTerm }) => {
     </div>
   );
 };
-
 export default NoteList;

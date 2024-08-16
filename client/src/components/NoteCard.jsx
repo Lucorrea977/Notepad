@@ -1,4 +1,3 @@
-// src/components/NoteCard.jsx
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { deleteNote, toggleNote, toggleTask } from '../redux/notesSlice';

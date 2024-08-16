@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addNote } from '../redux/notesSlice';
 
+const colors = ['bg-white', 'bg-red-200', 'bg-yellow-200', 'bg-green-200', 'bg-blue-200', 'bg-purple-200'];
+
 const NoteForm = () => {
   const dispatch = useDispatch();
   const [title, setTitle] = useState('');
@@ -22,7 +24,7 @@ const NoteForm = () => {
       date: dateTime,
       alarm: alarm || '',
       isExpanded: false,
-      tasks: [] // Inicialmente sin tareas
+      tasks: []
     };
     dispatch(addNote(newNote));
     setTitle('');
@@ -50,12 +52,15 @@ const NoteForm = () => {
         className="w-full mb-2 p-2 border border-gray-300 rounded"
         required
       />
-      <input
-        type="color"
-        value={color}
-        onChange={(e) => setColor(e.target.value)}
-        className="mb-2"
-      />
+      <div className="flex mb-2">
+        {colors.map((colorOption) => (
+          <div
+            key={colorOption}
+            className={`${colorOption} w-6 h-6 rounded-full cursor-pointer mr-2`}
+            onClick={() => setColor(colorOption)}
+          />
+        ))}
+      </div>
       <input
         type="datetime-local"
         value={dateTime}
